@@ -60,21 +60,22 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
   //
-  $("div[id^='hour-']").each(function () {
+  /*$("div[id^='hour-']").each(function () {
     let timeSlot = $(this).attr("id").replace("hour-", "");
-    if (timeSlot < parseInt(dayjs().format("H"))) {
+    if (dayjs().isAfter(dayjs(currentDate), 'day') || timeSlot < parseInt(dayjs().format("H"))) {
       $(this).addClass('past').removeClass('present future');
     } else if (timeSlot == parseInt(dayjs().format("H"))) {
       $(this).addClass('present').removeClass('past future');
     } else {
       $(this).addClass('future').removeClass('present past');
     }
-  });
+  });*/
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
- 
+
+
 setupCalendar();
   function setupCalendar() {
     clearCurrentDayEvents();
@@ -98,6 +99,16 @@ setupCalendar();
   function clearCurrentDayEvents() {
     $("div[id^='hour-']").each(function () {
       $(this).children('textarea').text("");
+      let timeSlot = $(this).attr("id").replace("hour-", "");
+      if (dayjs(currentDate).isBefore(dayjs(), 'day') || 
+          (dayjs(currentDate).isSame(dayjs(), 'day') && timeSlot < parseInt(dayjs().format("H")))) {
+        $(this).addClass('past').removeClass('present future');
+      } else if (dayjs(currentDate).isAfter(dayjs(), 'day') || 
+                (dayjs(currentDate).isSame(dayjs(), 'day') && timeSlot > parseInt(dayjs().format("H")))) {
+        $(this).addClass('future').removeClass('present past');
+      } else { 
+        $(this).addClass('present').removeClass('future past');
+      }
     });
   }
 
