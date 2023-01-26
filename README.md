@@ -82,8 +82,6 @@ Please refer to the LICENSE in the repo.
 
 ## Future Considerations
 
-### Difficulty level
-
 Below are some thoughts for future upgrades:
 - add timer so that once the hour turns, the corresponding calendar entry automatically gets coloured.
 - add a form for user workday hours input per day. Currently they are hard coded from 8am to 8pm for all days.
