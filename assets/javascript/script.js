@@ -4,7 +4,7 @@
 $(function () {
   // creates the calendar event entries
   createCalendar();
-
+  // sets up the calendar
   setupCalendar();
 
   // click listener for the previous and next day buttons
